@@ -28,7 +28,7 @@ class ServerlessAWSDocumentation {
 
     this.hooks = {
       'before:package:finalize': this._beforeDeploy,
-      'after:package:finalize': this._afterDeploy,
+      'after:deploy:deploy': this._afterDeploy,
       'downloadDocumentation:downloadDocumentation': this._download
     };
 
