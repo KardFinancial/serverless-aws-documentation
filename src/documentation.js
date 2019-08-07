@@ -100,6 +100,7 @@ module.exports = function() {
 			knownLocation
 		) {
 			Object.keys(parts).forEach(part => {
+				console.log('here are some ', part);
 				if (def[part]) {
 					this.createDocumentationPart(parts[part], def[part], knownLocation);
 				}
