@@ -8,6 +8,7 @@ const functionDocumentationParts = require('./functionDocumentationParts.json');
 function getDocumentationProperties(def, propertiesToGet) {
 	const docProperties = new Map();
 	propertiesToGet.forEach(key => {
+		console.log('line 11', key);
 		if (def[key]) {
 			docProperties.set(key, def[key]);
 		}
@@ -88,9 +89,10 @@ module.exports = function() {
 					throw new Error(msg);
 				}
 
-				def.forEach(singleDef =>
-					this._createDocumentationPart(part, singleDef, knownLocation)
-				);
+				def.forEach(singleDef => {
+					console.log('line 93', singleDef);
+					return this._createDocumentationPart(part, singleDef, knownLocation);
+				});
 			} else {
 				this._createDocumentationPart(part, def, knownLocation);
 			}
@@ -138,12 +140,13 @@ module.exports = function() {
 					})
 				)
 				.then(results =>
-					results.items.map(part =>
-						aws.request('APIGateway', 'deleteDocumentationPart', {
+					results.items.map(part => {
+						console.log('144', part);
+						return aws.request('APIGateway', 'deleteDocumentationPart', {
 							documentationPartId: part.id,
 							restApiId: this.restApiId
-						})
-					)
+						});
+					})
 				)
 				.then(promises => Promise.all(promises))
 				.then(() =>
@@ -175,6 +178,7 @@ module.exports = function() {
 		getFunctionDocumentationParts: function getFunctionDocumentationParts() {
 			const httpEvents = this._getHttpEvents();
 			Object.keys(httpEvents).forEach(funcNameAndPath => {
+        console.log("181", funcNameAndPath)
 				const httpEvent = httpEvents[funcNameAndPath];
 				const path = httpEvent.path;
 				const method = httpEvent.method.toUpperCase();
