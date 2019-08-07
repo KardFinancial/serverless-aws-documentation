@@ -162,7 +162,7 @@ module.exports = function() {
 
 		getGlobalDocumentationParts: function getGlobalDocumentationParts() {
 			const globalDocumentation = this.customVars.documentation;
-			concole.log('here is globalDocumentation ', globalDocumentation);
+			console.log('here is globalDocumentation ', globalDocumentation);
 			this.createDocumentationParts(
 				globalDocumentationParts,
 				globalDocumentation,
