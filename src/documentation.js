@@ -61,6 +61,8 @@ module.exports = function() {
 
 			const props = getDocumentationProperties(def, propertiesToGet);
 			if (props.size > 0) {
+				console.log('location', location);
+				console.log('props', props);
 				this.documentationParts.push({
 					location,
 					properties: _mapToObj(props),
@@ -100,6 +102,7 @@ module.exports = function() {
 			knownLocation
 		) {
 			Object.keys(parts).forEach(part => {
+				console.log('here is part', part);
 				if (def[part]) {
 					this.createDocumentationPart(parts[part], def[part], knownLocation);
 				}
@@ -162,7 +165,6 @@ module.exports = function() {
 
 		getGlobalDocumentationParts: function getGlobalDocumentationParts() {
 			const globalDocumentation = this.customVars.documentation;
-			console.log('here is globalDocumentation ', globalDocumentation);
 			this.createDocumentationParts(
 				globalDocumentationParts,
 				globalDocumentation,
